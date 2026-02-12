@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Kelaviiiiiiii! 🎉</title>
+    <title>HBD KELAVIIII🦋❤🥰</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -719,6 +719,114 @@
             animation: sparkle 1s ease-out;
             z-index: 9999;
         }
+
+        /* ── Video Popup Modal ── */
+        .video-popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .video-popup-overlay.active {
+            display: flex;
+        }
+
+        .video-popup-box {
+            position: relative;
+            background: linear-gradient(145deg, #1a0a2e, #2d1b4e);
+            border: 2px solid rgba(255, 107, 181, 0.5);
+            border-radius: 28px;
+            padding: 32px 28px 28px;
+            max-width: 480px;
+            width: 92%;
+            box-shadow: 0 0 80px rgba(255, 107, 181, 0.5), 0 0 20px rgba(255, 200, 50, 0.25);
+            animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.6); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .video-popup-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: rgba(255, 107, 181, 0.2);
+            border: 1px solid rgba(255, 107, 181, 0.4);
+            color: #fff;
+            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-popup-close:hover {
+            background: rgba(255, 107, 181, 0.6);
+            transform: rotate(90deg) scale(1.15);
+        }
+
+        .video-popup-flames {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            animation: flicker 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%   { transform: scale(1)    rotate(-1deg); filter: brightness(1);   }
+            50%  { transform: scale(1.05) rotate(1deg);  filter: brightness(1.2); }
+            100% { transform: scale(0.97) rotate(-1deg); filter: brightness(0.9); }
+        }
+
+        .video-popup-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6bb3, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+
+        .video-popup-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 107, 181, 0.4);
+            border: 2px solid rgba(255, 107, 181, 0.3);
+        }
+
+        .video-popup-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-popup-caption {
+            margin-top: 16px;
+            font-size: 1.05rem;
+            color: #ffd700;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -878,6 +986,29 @@
         </div>
     </div>
 
+    <!-- Video Popup Modal (triggered by candle button) -->
+    <div class="video-popup-overlay" id="videoPopup">
+        <div class="video-popup-box">
+            <button class="video-popup-close" onclick="closeVideoPopup()">&#10005;</button>
+            <div class="video-popup-flames">
+                <span class="flame">🕯️</span>
+                <span class="flame">🔥</span>
+                <span class="flame">🕯️</span>
+            </div>
+            <h3 class="video-popup-title">✨ A Special Video For You! ✨</h3>
+            <div class="video-popup-frame">
+                <iframe
+                    id="popupVideoIframe"
+                    src=""
+                    title="Birthday Surprise Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="video-popup-caption">🎂 Happy Birthday Kelaviiiiiiii! 🎂</p>
+        </div>
+    </div>
+
     <!-- Modal for fullscreen view -->
     <div class="modal" id="modal" onclick="closeModal()">
         <span class="close-modal">&times;</span>
@@ -927,6 +1058,28 @@
             document.getElementById('modal').style.display = 'none';
         }
 
+        function openVideoPopup(videoSrc) {
+            const overlay = document.getElementById('videoPopup');
+            const iframe  = document.getElementById('popupVideoIframe');
+            iframe.src = videoSrc + (videoSrc.includes('?') ? '&' : '?') + 'autoplay=1';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoPopup() {
+            const overlay = document.getElementById('videoPopup');
+            const iframe  = document.getElementById('popupVideoIframe');
+            overlay.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('videoPopup').addEventListener('click', function(e) {
+                if (e.target === this) closeVideoPopup();
+            });
+        });
+
         // Celebration function with enhanced effects
         function celebrate() {
             // Create lots of confetti
@@ -939,16 +1092,8 @@
                 navigator.vibrate([200, 100, 200]);
             }
             
-            // Show celebratory message
-            setTimeout(() => {
-                const messages = [
-                    '🎉🎂 HAPPY BIRTHDAY KELAVIIIIIIII! 🎂🎉',
-                    '✨ May this year bring you endless joy! ✨',
-                    '💖 You deserve all the happiness in the world! 💖',
-                    '🌟 Shine bright today and always! 🌟'
-                ];
-                alert(messages.join('\n\n'));
-            }, 500);
+            // Open video popup
+            openVideoPopup('https://drive.google.com/file/d/1E4_ybY4p9gZUJzFAc7Wfo6QYOdKq59RX/preview');
         }
 
         function createConfetti() {
