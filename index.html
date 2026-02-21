@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HBD KELAVIIII🦋❤🥰</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
     <style>
         * {
             margin: 0;
@@ -604,6 +605,15 @@
             backdrop-filter: blur(10px);
         }
 
+        .htbtn {
+      color: #fff;
+      font-size: 1.4rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+
         .modal-content {
             max-width: 95%;
             max-height: 95%;
@@ -729,7 +739,8 @@
             background: rgba(0, 0, 0, 0.88);
             backdrop-filter: blur(12px);
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            padding-top: 5vh;
             animation: fadeIn 0.35s ease;
         }
 
@@ -742,9 +753,9 @@
             background: linear-gradient(145deg, #1a0a2e, #2d1b4e);
             border: 2px solid rgba(255, 107, 181, 0.5);
             border-radius: 28px;
-            padding: 32px 28px 28px;
-            max-width: 480px;
-            width: 92%;
+            padding: 35px 31px 31px;
+            max-width: 528px;
+            width: 95%;
             box-shadow: 0 0 80px rgba(255, 107, 181, 0.5), 0 0 20px rgba(255, 200, 50, 0.25);
             animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-align: center;
@@ -785,9 +796,9 @@
         }
 
         @keyframes flicker {
-            0%   { transform: scale(1)    rotate(-1deg); filter: brightness(1);   }
-            50%  { transform: scale(1.05) rotate(1deg);  filter: brightness(1.2); }
-            100% { transform: scale(0.97) rotate(-1deg); filter: brightness(0.9); }
+            0%   { transform: scale(1)    rotate(-1deg); filter: brightness(1.1);   }
+            50%  { transform: scale(1.05) rotate(1deg);  filter: brightness(1.32); }
+            100% { transform: scale(0.97) rotate(-1deg); filter: brightness(0.99); }
         }
 
         .video-popup-title {
@@ -827,6 +838,108 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
+        
+        /* ── Heart anchor button ── */
+    .heart-btn-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 30px auto 10px;
+    }
+
+    a.heart-btn {
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 90px;
+      text-decoration: none;
+      cursor: pointer;
+      filter: drop-shadow(0 6px 18px rgba(255, 45, 85, 0.55));
+      transition: filter 0.3s;
+    }
+
+    a.heart-btn:hover {
+      filter: drop-shadow(0 8px 24px rgba(255, 45, 85, 0.85));
+    }
+
+    /* Pure CSS heart using two pseudo-elements */
+    a.heart-btn::before,
+    a.heart-btn::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background: linear-gradient(135deg, #ff2d55, #ff6b8a);
+      border-radius: 50px 50px 0 0;
+      transition: background 0.3s;
+    }
+
+    a.heart-btn::before {
+      left: 50px;
+      transform-origin: 0 100%;
+      transform: rotate(-45deg);
+    }
+
+    a.heart-btn::after {
+      left: 0;
+      transform-origin: 100% 100%;
+      transform: rotate(45deg);
+    }
+
+    a.heart-btn:hover::before,
+    a.heart-btn:hover::after {
+      background: linear-gradient(135deg, #ff1744, #ff4081);
+    }
+
+    a.heart-btn .heart-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-top: 18px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* ── Click animation ── */
+    a.heart-btn.clicked {
+      animation: heartbeat 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      20%  { transform: scale(1.35); }
+      40%  { transform: scale(0.9); }
+      60%  { transform: scale(1.2); }
+      80%  { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    /* floating particles */
+    .heart-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff6b8a;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heart-particle.burst {
+      animation: heartBurst 0.8s ease-out forwards;
+    }
+
+    @keyframes heartBurst {
+      0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
+    }
+
     </style>
 </head>
 <body>
@@ -957,32 +1070,13 @@
         <!-- Message Section -->
         <div class="message-section">
             <h2>💌 A Special Message For You 💌</h2>
-            <div class="message-box">
-                <p>
-                    Dear Kelaviiiiiiii,
-                </p>
-                <p>
-                    On this beautiful day, March 28th, we celebrate not just another year, but the incredible person you've become. 
-                    Your kindness, your laughter, and your beautiful spirit light up every space you enter.
-                </p>
-                <p>
-                    Every moment shared with you is a precious gift. Your smile has the power to brighten the darkest days, 
-                    and your presence brings warmth to everyone around you. You make ordinary moments feel extraordinary.
-                </p>
-                <p>
-                    As you turn another year wiser and more wonderful, know that you are deeply loved and cherished. 
-                    May this year bring you endless joy, incredible adventures, and dreams that come true beyond your wildest imagination!
-                </p>
-                <p>
-                    Thank you for being you – authentic, beautiful, and absolutely amazing in every way.
-                </p>
-                <p class="signature">
-                    Happy Birthday, Saroo! 🎂✨💖
-                </p>
-                <p style="font-size: 1.4rem; margin-top: 30px;">
-                    Here's to celebrating YOU today and always! 🎉🎈
-                </p>
-            </div>
+      <!-- <p style="color:#ffd700; font-size:1rem; letter-spacing:0.12em; margin-bottom:16px;">Click the heart below 💖</p> -->
+         <h1 class="htbtn">Click the heart</h1>
+  <div class="heart-btn-wrapper" id="heartWrapper">
+    <a class="heart-btn" href="msg/index.html" id="heartBtn" aria-label="Like">
+      <span class="heart-label"></span>
+    </a>
+  </div>
         </div>
     </div>
 
@@ -992,10 +1086,10 @@
             <button class="video-popup-close" onclick="closeVideoPopup()">&#10005;</button>
             <div class="video-popup-flames">
                 <span class="flame">🕯️</span>
-                <span class="flame">👀</span>
+                <span class="flame">🔥</span>
                 <span class="flame">🕯️</span>
             </div>
-            <h3 class="video-popup-title">A Special Video For You!😻</h3>
+            <h3 class="video-popup-title">✨A Special Video For You!✨</h3>
             <div class="video-popup-frame">
                 <iframe
                     id="popupVideoIframe"
@@ -1093,14 +1187,14 @@
             }
             
             // Open video popup
-            openVideoPopup('https://drive.google.com/file/d/1E4_ybY4p9gZUJzFAc7Wfo6QYOdKq59RX/preview');
+            openVideoPopup('vid/d2.mp4');
         }
 
         function createConfetti() {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = '-6000px';
+            confetti.style.top = '-600px';
             confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
             confetti.style.animationDelay = Math.random() * 0.5 + 's';
             
@@ -1233,6 +1327,51 @@
                 document.body.style.opacity = '1';
             }, 100);
         });
+
+        // heart button
+        const heartBtn = document.getElementById('heartBtn');
+        const heartWrapper = document.getElementById('heartWrapper');
+
+        if (heartBtn && heartWrapper) {
+          heartBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // block immediate navigation so animation plays first
+
+            const destination = heartBtn.getAttribute('href');
+
+            // heartbeat animation
+            heartBtn.classList.remove('clicked');
+            void heartBtn.offsetWidth;
+            heartBtn.classList.add('clicked');
+
+            // spawn particles
+            const rect  = heartBtn.getBoundingClientRect();
+            const wRect = heartWrapper.getBoundingClientRect();
+            const cx = rect.left - wRect.left + rect.width / 2;
+            const cy = rect.top  - wRect.top  + rect.height / 2;
+
+            for (let i = 0; i < 12; i++) {
+              const p = document.createElement('div');
+              p.className = 'heart-particle';
+              const angle = (i / 12) * 2 * Math.PI;
+              const dist  = 55 + Math.random() * 40;
+              p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+              p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+              p.style.left       = (cx - 4) + 'px';
+              p.style.top        = (cy - 4) + 'px';
+              p.style.position   = 'absolute';
+              p.style.background = `hsl(${340 + Math.random()*30}, 90%, ${60 + Math.random()*20}%)`;
+              heartWrapper.appendChild(p);
+              void p.offsetWidth;
+              p.classList.add('burst');
+              p.addEventListener('animationend', () => p.remove());
+            }
+
+            // navigate to the link after the animation finishes (~550ms)
+            setTimeout(() => {
+              window.location.href = destination;
+            }, 580);
+          });
+        }
     </script>
 </body>
 </html>
