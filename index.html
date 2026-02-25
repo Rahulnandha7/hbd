@@ -1080,6 +1080,27 @@
         </div>
     </div>
 
+    <!-- Password Modal -->
+    <div id="passwordModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9999; justify-content:center; align-items:center; backdrop-filter:blur(6px);">
+      <div style="background:linear-gradient(135deg,#1a1040,#2d1b5e); border:2px solid rgba(255,107,181,0.4); border-radius:24px; padding:40px 36px; max-width:360px; width:90%; text-align:center; box-shadow:0 20px 60px rgba(255,107,181,0.3); position:relative;">
+        <button onclick="document.getElementById('passwordModal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.4rem;cursor:pointer;">✕</button>
+        <div style="font-size:2.8rem;margin-bottom:12px;">🔐</div>
+        <h3 style="font-family:'Playfair Display',serif; color:#ff6bb3; font-size:1.5rem; margin-bottom:8px;">Secret Page</h3>
+        <p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-bottom:24px;">Enter the password to continue 💖</p>
+        <input id="passwordInput" type="password" placeholder="Enter password..."
+          style="width:100%; padding:14px 18px; border-radius:50px; border:2px solid rgba(255,107,181,0.4); background:rgba(255,255,255,0.08); color:#fff; font-size:1.1rem; text-align:center; outline:none; letter-spacing:4px; margin-bottom:14px; font-family:'Poppins',sans-serif;"
+          onfocus="this.style.borderColor='#ff6bb3'" onblur="this.style.borderColor='rgba(255,107,181,0.4)'"
+          onkeydown="if(event.key==='Enter')checkPassword(); if(event.key==='Escape')document.getElementById('passwordModal').style.display='none'">
+        <p id="passwordError" style="display:none; color:#ff6b6b; font-size:0.9rem; margin-bottom:14px;"></p>
+        <button onclick="checkPassword()"
+          style="background:linear-gradient(135deg,#ff6b9d,#c64fc9); border:none; padding:14px 40px; border-radius:50px; color:#fff; font-size:1rem; font-weight:600; cursor:pointer; letter-spacing:1px; width:100%; transition:all 0.3s ease;"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(255,107,181,0.5)'"
+          onmouseout="this.style.transform='translateY(0)';this.style.boxShadow=''">
+          Unlock 💝
+        </button>
+      </div>
+    </div>
+
     <!-- Video Popup Modal (triggered by candle button) -->
     <div class="video-popup-overlay" id="videoPopup">
         <div class="video-popup-box">
@@ -1334,9 +1355,7 @@
 
         if (heartBtn && heartWrapper) {
           heartBtn.addEventListener('click', function(e) {
-            e.preventDefault(); // block immediate navigation so animation plays first
-
-            const destination = heartBtn.getAttribute('href');
+            e.preventDefault();
 
             // heartbeat animation
             heartBtn.classList.remove('clicked');
@@ -1366,12 +1385,38 @@
               p.addEventListener('animationend', () => p.remove());
             }
 
-            // navigate to the link after the animation finishes (~550ms)
+            // Show password modal after animation
             setTimeout(() => {
-              window.location.href = destination;
+              document.getElementById('passwordModal').style.display = 'flex';
+              document.getElementById('passwordInput').value = '';
+              document.getElementById('passwordError').style.display = 'none';
+              document.getElementById('passwordInput').focus();
             }, 580);
           });
         }
+
+        function checkPassword() {
+          const input = document.getElementById('passwordInput').value;
+          const errorEl = document.getElementById('passwordError');
+          if (input === '6143') {
+            document.getElementById('passwordModal').style.display = 'none';
+            window.location.href = 'msg/index.html';
+          } else {
+            errorEl.style.display = 'block';
+            errorEl.textContent = '❌ Wrong password! Try again 💔';
+            document.getElementById('passwordInput').select();
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const pwInput = document.getElementById('passwordInput');
+          if (pwInput) {
+            pwInput.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter') checkPassword();
+              if (e.key === 'Escape') document.getElementById('passwordModal').style.display = 'none';
+            });
+          }
+        });
     </script>
 </body>
 </html>
